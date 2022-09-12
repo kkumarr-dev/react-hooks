@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { useEffect, useState } from "react";
+import { ReactHook, ThemeContext, Themes, Users } from "./pages";
+import { AuthContext } from "./pages/AuthContext";
+import { UseReducerHook } from "./pages/UseReducerHook";
+export const App = () => {
+  const [theme, setTheme] = useState("light");
+  const [themeObject, setThemeObject] = useState(null);
+  const [authStatus, setAuthStatus] = useState(0);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    debugger;
+    setThemeObject(Themes[theme]);
+  }, [theme]);
+  const login = () => {
+    setAuthStatus(true);
+    setUser("kumar");
+  };
+  const changeTheme = () => {
+    debugger;
+    setTheme(theme === "light" ? "dark" : "light");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContext.Provider
+      value={{ status: authStatus, login: login, user: user }}
+    >
+      <ThemeContext.Provider
+        value={{
+          currentTheme: theme,
+          setTheme: changeTheme,
+          themeObject: themeObject,
+        }}
+      >
+        <i>
+          Hi {user} !
+          <a href="#" onClick={changeTheme}>
+            <span>Change Theme</span>
+          </a>
+        </i>
+        <ReactHook />
+        <UseReducerHook />
+        <Users />
+      </ThemeContext.Provider>
+    </AuthContext.Provider>
   );
-}
-
-export default App;
+};
