@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { ReactHook, ThemeContext, Themes, Users } from "./pages";
-import { AuthContext } from "./pages/AuthContext";
-import { UseReducerHook } from "./pages/UseReducerHook";
+import {
+  ReactHook,
+  ThemeContext,
+  Themes,
+  Users,
+  AuthContext,
+  UseReducerHook,
+} from "./pages";
 export const App = () => {
   const [theme, setTheme] = useState("light");
   const [themeObject, setThemeObject] = useState(null);
