@@ -1,24 +1,24 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 import {
   ReactHook,
   ThemeContext,
-  Themes,
   Users,
   AuthContext,
   UseReducerHook,
+  UseRefHook,
 } from "./pages";
 export const App = () => {
   const [theme, setTheme] = useState("light");
-  const [themeObject, setThemeObject] = useState(null);
   const [authStatus, setAuthStatus] = useState(0);
   const [user, setUser] = useState(null);
   useEffect(() => {
     debugger;
-    setThemeObject(Themes[theme]);
   }, [theme]);
-  const login = () => {
-    setAuthStatus(true);
-    setUser("kumar");
+  const login = (e) => {
+    debugger;
+    setAuthStatus(e);
+    setUser(e ? "kumar" : "");
   };
   const changeTheme = () => {
     debugger;
@@ -32,7 +32,6 @@ export const App = () => {
         value={{
           currentTheme: theme,
           setTheme: changeTheme,
-          themeObject: themeObject,
         }}
       >
         <i>
@@ -43,6 +42,7 @@ export const App = () => {
         </i>
         <ReactHook />
         <UseReducerHook />
+        <UseRefHook />
         <Users />
       </ThemeContext.Provider>
     </AuthContext.Provider>
